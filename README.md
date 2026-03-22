@@ -1,3 +1,8 @@
+# Weekly TF Task 5
+
+The core concept students needed to understand is how to modify a rule based classifier and understand how handcrafted logic shapes predictions. Students are most likely to struggle in balancing the rules in the classifier. The AI was helpful implementing the functions especially the preprocess function and the model_cards. However, it kept removing the TODO while implementing, making it hard to review if everything is implemented afterwards. One way I would guide a student without giving the answer is to encourage them to not overthink the models too much otherwise they would get stuck before they even begin. 
+
+
 # The Mood Machine
 
 The Mood Machine is a simple text classifier that begins with a rule based approach and can optionally be extended with a small machine learning model. It tries to guess whether a short piece of text sounds **positive**, **negative**, **neutral**, or even **mixed** based on patterns in your data.
