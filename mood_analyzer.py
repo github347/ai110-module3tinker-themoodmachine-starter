@@ -174,12 +174,20 @@ class MoodAnalyzer:
         Just remember that whatever labels you return should match the labels
         you use in TRUE_LABELS in dataset.py if you care about accuracy.
         """
-        # TODO: Implement this method.
-        #   1. Call self.score_text(text) to get the numeric score.
-        #   2. Return "positive" if the score is above 0.
-        #   3. Return "negative" if the score is below 0.
-        #   4. Return "neutral" otherwise.
-        pass
+        score = self.score_text(text)
+
+        if score > 0:
+            return "positive"
+        elif score < 0:
+            return "negative"
+        else:
+            tokens = self.preprocess(text)
+            has_positive = any(t in self.positive_words for t in tokens)
+            has_negative = any(t in self.negative_words for t in tokens)
+            if has_positive and has_negative:
+                return "mixed"
+            else:
+                return "neutral"
 
     # ---------------------------------------------------------------------
     # Explanations (optional but recommended)
@@ -203,20 +211,58 @@ class MoodAnalyzer:
         """
         tokens = self.preprocess(text)
 
+        negation_tokens = {
+            "not",
+            "no",
+            "never",
+            "don't",
+            "dont",
+            "can't",
+            "cant",
+            "won't",
+            "wont",
+            "isn't",
+            "isnt",
+            "wasn't",
+            "wasnt",
+        }
+
+        emoji_weights = {
+            "smile_emoji": 1,
+            "laugh_emoji": 1,
+            "sad_emoji": -1,
+            "dead_emoji": -1,
+            "sarcasm_emoji": -1,
+        }
+
         positive_hits: List[str] = []
         negative_hits: List[str] = []
-        score = 0
+        emoji_hits: List[str] = []
 
-        for token in tokens:
+        for index, token in enumerate(tokens):
+            if token in emoji_weights:
+                emoji_hits.append(token)
+                continue
+
+            prev_token = tokens[index - 1] if index > 0 else ""
+            is_negated = prev_token in negation_tokens
+
             if token in self.positive_words:
-                positive_hits.append(token)
-                score += 1
-            if token in self.negative_words:
-                negative_hits.append(token)
-                score -= 1
+                if is_negated:
+                    negative_hits.append(f"not {token}")
+                else:
+                    positive_hits.append(token)
+            elif token in self.negative_words:
+                if is_negated:
+                    positive_hits.append(f"not {token}")
+                else:
+                    negative_hits.append(token)
+
+        score = self.score_text(text)
 
         return (
             f"Score = {score} "
             f"(positive: {positive_hits or '[]'}, "
-            f"negative: {negative_hits or '[]'})"
+            f"negative: {negative_hits or '[]'}, "
+            f"emojis: {emoji_hits or '[]'})"
         )
