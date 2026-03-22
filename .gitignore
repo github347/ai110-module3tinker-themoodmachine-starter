@@ -1,9 +1,2 @@
 .vscode/settings.json
-__pycache__/dataset.cpython-312.pyc
-__pycache__/dataset.cpython-314.pyc
-__pycache__/mood_analyzer.cpython-312.pyc
-__pycache__/mood_analyzer.cpython-314.pyc
-__pycache__/dataset.cpython-314.pyc
-__pycache__/mood_analyzer.cpython-314.pyc
-__pycache__/mood_analyzer.cpython-314.pyc
-__pycache__/dataset.cpython-314.pyc
+__pycache__/*
