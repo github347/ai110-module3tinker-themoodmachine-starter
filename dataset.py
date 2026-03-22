@@ -43,6 +43,7 @@ NEGATIVE_WORDS = [
 # ---------------------------------------------------------------------
 
 # Short example posts written as if they were social media updates or messages.
+
 SAMPLE_POSTS = [
     "I love this class so much",
     "Today was a terrible day",
@@ -50,6 +51,19 @@ SAMPLE_POSTS = [
     "This is fine",
     "So excited for the weekend",
     "I am not happy about this",
+    
+    # New posts
+    "Just had a great day",
+    "Good morning the world 🌎",
+    "I want some food badly",
+    "Lowkey stressed but trying to stay positive",
+    "Highkey this is the best news ever 😂",
+    "I absolutely love getting stuck in traffic 🙃",
+    "No cap, today drained my soul 💀",
+    "Feeling weird… like happy-sad at the same time 🥲",
+    "This coffee is saving my life right now :)",
+    "Why does everything have to be so complicated",
+    "Honestly, not bad… could be worse I guess",
 ]
 
 # Human labels for each post above.
@@ -58,6 +72,8 @@ SAMPLE_POSTS = [
 #   - "negative"
 #   - "neutral"
 #   - "mixed"
+
+
 TRUE_LABELS = [
     "positive",  # "I love this class so much"
     "negative",  # "Today was a terrible day"
@@ -65,7 +81,21 @@ TRUE_LABELS = [
     "neutral",   # "This is fine"
     "positive",  # "So excited for the weekend"
     "negative",  # "I am not happy about this"
+    
+    # New labels
+    "positive",  # "Just had a great day"
+    "positive",  # "Good morning the world 🌎"
+    "neutral",   # "I want some food badly"
+    "mixed",      # stressed + positive effort: "Lowkey stressed but trying to stay positive"
+    "positive",   # excited, laughing emoji: "Highkey this is the best news ever 😂"
+    "negative",   # sarcasm expressing frustration: "I absolutely love getting stuck in traffic 🙃"
+    "negative",   # slang + exhaustion: "No cap, today drained my soul 💀"
+    "mixed",      # happy-sad ambiguity: "Feeling weird… like happy-sad at the same time 🥲"
+    "positive",   # mild positive: "This coffee is saving my life right now :)"
+    "negative",   # frustration: "Why does everything have to be so complicated"
+    "neutral",    # balanced, lukewarm: "Honestly, not bad… could be worse I guess"
 ]
+
 
 # TODO: Add 5-10 more posts and labels.
 #
@@ -91,4 +121,4 @@ TRUE_LABELS = [
 # TRUE_LABELS.append("mixed")
 #
 # Remember to keep them aligned:
-#   len(SAMPLE_POSTS) == len(TRUE_LABELS)
+len(SAMPLE_POSTS) == len(TRUE_LABELS)

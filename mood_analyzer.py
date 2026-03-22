@@ -9,6 +9,8 @@ This class starts with very simple logic:
   - Convert that score into a mood label
 """
 
+import re
+
 from typing import List, Dict, Tuple, Optional
 
 from dataset import POSITIVE_WORDS, NEGATIVE_WORDS
@@ -52,9 +54,43 @@ class MoodAnalyzer:
           - Handle simple emojis separately (":)", ":-(", "🥲", "😂")
           - Normalize repeated characters ("soooo" -> "soo")
         """
-        cleaned = text.strip().lower()
-        tokens = cleaned.split()
+        if not text:
+          return []
 
+        cleaned = text.strip().lower()
+
+        emoticon_map = {
+          ":)": "smile_emoji",
+          ":-)": "smile_emoji",
+          ":(": "sad_emoji",
+          ":-(": "sad_emoji",
+          ":d": "laugh_emoji",
+          ":-d": "laugh_emoji",
+        }
+
+        for emoticon, token in emoticon_map.items():
+          cleaned = cleaned.replace(emoticon, f" {token} ")
+
+        emoji_map = {
+          "😂": "laugh_emoji",
+          "🥲": "sad_emoji",
+          "💀": "dead_emoji",
+          "🙃": "sarcasm_emoji",
+          "🌎": "world_emoji",
+        }
+
+        for emoji, token in emoji_map.items():
+          cleaned = cleaned.replace(emoji, f" {token} ")
+
+        cleaned = cleaned.replace("-", " ")
+        cleaned = re.sub(r"[^a-z0-9_\s']", " ", cleaned)
+
+        raw_tokens = cleaned.split()
+
+        def normalize_repeated_characters(token: str) -> str:
+          return re.sub(r"(.)\1{2,}", r"\1\1", token)
+
+        tokens = [normalize_repeated_characters(token) for token in raw_tokens if token]
         return tokens
 
     # ---------------------------------------------------------------------
@@ -75,15 +111,48 @@ class MoodAnalyzer:
           - Give some words higher weights than others (for example "hate" < "annoyed")
           - Treat emojis or slang (":)", "lol", "💀") as strong signals
         """
-        # TODO: Implement this method.
-        #   1. Call self.preprocess(text) to get tokens.
-        #   2. Loop over the tokens.
-        #   3. Increase the score for positive words, decrease for negative words.
-        #   4. Return the total score.
-        #
-        # Hint: if you implement negation, you may want to look at pairs of tokens,
-        # like ("not", "happy") or ("never", "fun").
-        pass
+        tokens = self.preprocess(text)
+
+        negation_tokens = {
+          "not",
+          "no",
+          "never",
+          "don't",
+          "dont",
+          "can't",
+          "cant",
+          "won't",
+          "wont",
+          "isn't",
+          "isnt",
+          "wasn't",
+          "wasnt",
+        }
+
+        emoji_weights = {
+          "smile_emoji": 1,
+          "laugh_emoji": 1,
+          "sad_emoji": -1,
+          "dead_emoji": -1,
+          "sarcasm_emoji": -1,
+        }
+
+        score = 0
+
+        for index, token in enumerate(tokens):
+          if token in emoji_weights:
+            score += emoji_weights[token]
+            continue
+
+          prev_token = tokens[index - 1] if index > 0 else ""
+          is_negated = prev_token in negation_tokens
+
+          if token in self.positive_words:
+            score += -1 if is_negated else 1
+          elif token in self.negative_words:
+            score += 1 if is_negated else -1
+
+        return score
 
     # ---------------------------------------------------------------------
     # Label prediction
