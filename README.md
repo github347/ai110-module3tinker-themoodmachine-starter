@@ -1,5 +1,12 @@
 # Weekly TF Task 5
 
+Jumpstart Questions Ideas: 
+- What type of text do you think our dataset is missing that would change the model’s behavior?
+- Make an emoji‑only post and tell us what mood you think it is.
+- What’s a short sentence that you genuinely can’t decide the mood of?
+
+---
+
 The core concept students needed to understand is how to modify a rule based classifier and understand how handcrafted logic shapes predictions. Students are most likely to struggle in balancing the rules in the classifier. The AI was helpful implementing the functions especially the preprocess function and the model_cards. However, it kept removing the TODO while implementing, making it hard to review if everything is implemented afterwards. One way I would guide a student without giving the answer is to encourage them to not overthink the models too much otherwise they would get stuck before they even begin. 
 
 
