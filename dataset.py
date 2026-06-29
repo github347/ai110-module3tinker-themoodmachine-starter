@@ -63,7 +63,7 @@ SAMPLE_POSTS = [
     "Feeling weird… like happy-sad at the same time 🥲",
     "This coffee is saving my life right now :)",
     "Why does everything have to be so complicated",
-    "Honestly, not bad… could be worse I guess",
+    
 ]
 
 # Human labels for each post above.
@@ -93,7 +93,7 @@ TRUE_LABELS = [
     "mixed",      # happy-sad ambiguity: "Feeling weird… like happy-sad at the same time 🥲"
     "positive",   # mild positive: "This coffee is saving my life right now :)"
     "negative",   # frustration: "Why does everything have to be so complicated"
-    "neutral",    # balanced, lukewarm: "Honestly, not bad… could be worse I guess"
+    
 ]
 
 
@@ -119,6 +119,11 @@ TRUE_LABELS = [
 #
 # SAMPLE_POSTS.append("Lowkey stressed but kind of proud of myself")
 # TRUE_LABELS.append("mixed")
+
+SAMPLE_POSTS.append("Honestly, not bad… could be worse I guess")
+TRUE_LABELS.append("neutral")   # balanced, lukewarm: "Honestly, not bad… could be worse I guess"
+
+
 #
 # Remember to keep them aligned:
 len(SAMPLE_POSTS) == len(TRUE_LABELS)
