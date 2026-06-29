@@ -59,10 +59,7 @@ SAMPLE_POSTS = [
     "Lowkey stressed but trying to stay positive",
     "Highkey this is the best news ever 😂",
     "I absolutely love getting stuck in traffic 🙃",
-    "No cap, today drained my soul 💀",
-    "Feeling weird… like happy-sad at the same time 🥲",
-    "This coffee is saving my life right now :)",
-    "Why does everything have to be so complicated",
+    
     
 ]
 
@@ -89,10 +86,7 @@ TRUE_LABELS = [
     "mixed",      # stressed + positive effort: "Lowkey stressed but trying to stay positive"
     "positive",   # excited, laughing emoji: "Highkey this is the best news ever 😂"
     "negative",   # sarcasm expressing frustration: "I absolutely love getting stuck in traffic 🙃"
-    "negative",   # slang + exhaustion: "No cap, today drained my soul 💀"
-    "mixed",      # happy-sad ambiguity: "Feeling weird… like happy-sad at the same time 🥲"
-    "positive",   # mild positive: "This coffee is saving my life right now :)"
-    "negative",   # frustration: "Why does everything have to be so complicated"
+    
     
 ]
 
@@ -123,6 +117,17 @@ TRUE_LABELS = [
 SAMPLE_POSTS.append("Honestly, not bad… could be worse I guess")
 TRUE_LABELS.append("neutral")   # balanced, lukewarm: "Honestly, not bad… could be worse I guess"
 
+SAMPLE_POSTS.append("No cap, today drained my soul 💀")
+TRUE_LABELS.append("negative")   # slang + exhaustion: "No cap, today drained my soul 💀"
+   
+SAMPLE_POSTS.append("Feeling weird… like happy-sad at the same time 🥲")
+TRUE_LABELS.append("mixed")      # happy-sad ambiguity: "Feeling weird… like happy-sad at the same time 🥲"
+   
+SAMPLE_POSTS.append("This coffee is saving my life right now :)")
+TRUE_LABELS.append("positive")   # mild positive: "This coffee is saving my life right now :)"
+    
+SAMPLE_POSTS.append("Why does everything have to be so complicated")
+TRUE_LABELS.append("negative")   # frustration: "Why does everything have to be so complicated"
 
 #
 # Remember to keep them aligned:
