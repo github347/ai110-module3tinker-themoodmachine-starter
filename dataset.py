@@ -16,6 +16,7 @@ POSITIVE_WORDS = [
     "happy",
     "great",
     "good",
+    "like",
     "love",
     "excited",
     "awesome",
